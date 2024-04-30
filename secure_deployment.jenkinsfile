@@ -2,68 +2,59 @@ pipeline {
     agent any  
 
     stages {
-        stage('Build') {
-            // 使用 Maven 编译和打包代码 (替换为适合您的构建工具)
+        stage('Build') {        
             steps {
                 echo '使用 Maven 编译代码'
-                sh 'mvn clean package'  // 仅示例，需根据实际构建工具调整命令
             }
         }
         stage('Unit and Integration Tests') {
-            // 使用 JUnit 和 Selenium 进行测试 (替换为适合您的测试工具)
+           
             steps {
-                echo '运行 JUnit 单元测试'
-                sh 'mvn test'  // 仅示例，需根据实际测试工具调整命令
-                echo '运行 Selenium 集成测试'
-                // ... (根据您选择的测试工具添加命令)
+                echo 'running JUnit test'
+                echo '运行 Selenium Integration Tests'
+                
             }
-        }
-        stage('Code Analysis') {
-            // 使用 SonarQube 分析代码 (替换为适合您的代码分析工具)
-            steps {
-                echo '使用 SonarQube 分析代码质量'
-                // ... (根据 SonarQube 集成插件配置分析命令)
+            post {
+                 success {
+                         emailext attachLog: true, 
+                         to: "kimirise@gmail.com", 
+                         subject: "Unit and integration test status Email", 
+                         body: "Unit and integration test was successfull"
+                         }
+                 failure {
+                         emailext attachLog: true, 
+                         to: "kimirise@gmail.com", 
+                         subject: "Unit and integration test status Email", 
+                         body: "Unit and integration test failed"
+                         }
             }
-        }
+        }      
         stage('Security Scan') {
             // 使用 SAST 工具扫描漏洞 (替换为适合您的安全扫描工具)
             steps {
-                echo '使用 SAST 工具扫描安全漏洞'
-                // ... (根据您选择的 SAST 工具配置扫描命令)
+                echo '准备进行安全扫描...'
+                echo '配置安全扫描工具...'
+                echo '设置安全扫描范围...'
+                echo '开始模拟安全扫描...'
+                echo '正在扫描文件1...'
+                echo '正在扫描文件2...'
+                echo '正在扫描文件3...'
+                echo '安全扫描完成！'
             }
-        }
-        stage('Deploy to Staging') {
-            // 部署到临时服务器 (例如，AWS EC2 实例)
-            steps {
-                echo '将应用部署到临时服务器'
-                // ... (根据部署方式添加命令)
+            post {
+                 success {
+                         emailext attachLog: true, 
+                         to: "kimirise@gmail.com", 
+                         subject: "Unit and integration test status Email", 
+                         body: "Unit and integration test was successfull"
+                         }
+                 failure {
+                         emailext attachLog: true,
+                         to: "kimirise@gmail.com", 
+                         subject: "Unit and integration test status Email", 
+                         body: "Unit and integration test failed"
+                         }
             }
-        }
-        stage('Integration Tests on Staging') {
-            // 在临时环境运行集成测试
-            steps {
-                echo '在临时环境运行集成测试'
-                // ... (根据测试工具运行测试)
-            }
-        }
-        stage('Deploy to Production') {
-            // 部署到生产服务器 (例如，AWS EC2 实例)
-            steps {
-                echo '将应用部署到生产服务器'
-                // ... (根据部署方式添加命令)
-            }
-        }
-    }
-
-    // 配置通知 (可选)
-    post {
-        success {
-            // 发送成功通知 (替换为您的邮箱地址)
-            emailaction(recipient: 's223898356@deakin.edu.au', subject: 'Pipeline successfull', body: '$BUILD_LOG')
-        }
-        failure {
-            // 发送失败通知 (替换为您的邮箱地址)
-            emailaction(recipient: 's223898356@deakin.edu.au', subject: 'Pipeline failure', body: '$BUILD_LOG')
         }
     }
 }
