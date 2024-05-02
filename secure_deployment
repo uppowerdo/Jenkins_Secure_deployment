@@ -41,16 +41,20 @@ pipeline {
             }
             post {
                  success {
-                     emailtext attchLog: true,
+                     emailtext (
+                         attchLog: true,
                          to: "kimirise@gmail.com", 
                          subject: "Unit and integration test status Email", 
                          body: "Unit and integration test was successfull"
+                         )
                          }
                  failure {
-                     emailtext attchLog: true,
+                     emailtext (
+                         attchLog: true,
                          to: "kimirise@gmail.com", 
                          subject: "Unit and integration test status Email", 
                          body: "Unit and integration test failed"
+                         )
                          }
             }
         }
