@@ -27,18 +27,13 @@ pipeline {
                          to: 'kimirise@gmail.com')
                          }
             }
-        }      
-        stage('Security Scan') {
-            // 使用 SAST 工具扫描漏洞 (替换为适合您的安全扫描工具)
+        }  
+        stage('Code Analysis') {
+            echo 'Using Checkstyle to analysis'
+        }
+        stage('Security Scan') {  
             steps {
-                echo '准备进行安全扫描...'
-                echo '配置安全扫描工具...'
-                echo '设置安全扫描范围...'
-                echo '开始模拟安全扫描...'
-                echo '正在扫描文件1...'
-                echo '正在扫描文件2...'
-                echo '正在扫描文件3...'
-                echo '安全扫描完成！'
+                echo ' Using SonarQube to Scan'
             }
             post {
                  success {
@@ -52,8 +47,23 @@ pipeline {
                     body: 'Security Scan failed', 
                     subject: 'Security Scan status Email', 
                     to: 'kimirise@gmail.com')
-                         }
+                 }
             }
         }
+        stage('Deploy to Staging') {  
+            steps {
+             echo 'deploy the application to the AWS EC2 instance'
+            }
+        }
+      stage('Integration test on Staging') {  
+            steps {
+             echo 'Run integration test on the Staging enviorment'
+            }
+     }
+      stage('Deploy to Production') {  
+            steps {
+             echo 'Deploy the application to Production server'
+            }
+      }
     }
 }
