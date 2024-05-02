@@ -22,12 +22,12 @@ pipeline {
             }
             post {
                  success {   
-                         mailto: "kimirise@gmail.com", 
+                         mail to: "kimirise@gmail.com", 
                          subject: "Unit and integration test status Email", 
                          body: "Unit and integration test was successfull"
                          }
                  failure {
-                         mailto: "kimirise@gmail.com", 
+                         mail to: "kimirise@gmail.com", 
                          subject: "Unit and integration test status Email", 
                          body: "Unit and integration test failed"
                          }
@@ -47,12 +47,12 @@ pipeline {
             }
             post {
                  success {
-                         mailto: "kimirise@gmail.com", 
+                         mail to: "kimirise@gmail.com", 
                          subject: "Unit and integration test status Email", 
                          body: "Unit and integration test was successfull"
                          }
                  failure {
-                         mailto: "kimirise@gmail.com", 
+                         mail to: "kimirise@gmail.com", 
                          subject: "Unit and integration test status Email", 
                          body: "Unit and integration test failed"
                          }
