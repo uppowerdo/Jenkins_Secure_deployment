@@ -29,7 +29,9 @@ pipeline {
             }
         }  
         stage('Code Analysis') {
+            steps{
             echo 'Using Checkstyle to analysis'
+            }
         }
         stage('Security Scan') {  
             steps {
