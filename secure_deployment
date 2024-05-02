@@ -45,14 +45,12 @@ pipeline {
                          to: "kimirise@gmail.com", 
                          subject: "Unit and integration test status Email", 
                          body: "Unit and integration test was successfull"
-                         mimeType: 'text/plain'
                          }
                  failure {
                      emailtext attchLog: true,
                          to: "kimirise@gmail.com", 
                          subject: "Unit and integration test status Email", 
                          body: "Unit and integration test failed"
-                         mimeType: 'text/plain'
                          }
             }
         }
