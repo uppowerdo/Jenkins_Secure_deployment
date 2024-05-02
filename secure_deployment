@@ -7,7 +7,7 @@ pipeline {
                 echo 'Using Maven complie'
             }
         }
-        stage('Unit and Integration Tests') {
+        stage('Unit and Integration Tests-1') {
            
             steps {
                 echo 'running JUnit test'
