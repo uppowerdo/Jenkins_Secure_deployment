@@ -2,12 +2,6 @@ pipeline {
     agent any  
    
     stages {
-        stage('Clone the repo'){
-             steps{
-                   echo 'Clone the repo'
-                   sh 'git clone https://github.com/uppowerdo/Jenkins_Secure_deployment.git'
-                }      
-    }
         stage('Build') {        
             steps {
                 echo '使用 Maven 编译代码'
