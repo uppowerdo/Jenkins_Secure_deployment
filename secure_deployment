@@ -7,7 +7,7 @@ pipeline {
                 echo 'Using Maven complie'
             }
         }
-        stage('Unit and Integration Tests-1') {
+        stage('Unit and Integration Tests') {
            
             steps {
                 echo 'running JUnit test'
@@ -16,9 +16,10 @@ pipeline {
             }
             post {
                  success {   
-                         mail to: 'kimirise@gmail.com',
-                         body: 'Unit and integration test was successfull', 
-                         subject: 'Unit and integration test status Email'
+                         emailext(attachLog: true, 
+                         body: 'Unit and integration was successfull', 
+                         subject: 'Unit and integration test status Email', 
+                         to: 'kimirise@gmail.com')
                          }
                  failure {
                          emailext(attachLog: true, 
@@ -35,7 +36,7 @@ pipeline {
         }
         stage('Security Scan') {  
             steps {
-                echo ' Using SonarQube to Scan'
+                echo 'Using SonarQube to Scan'
             }
             post {
                  success {
